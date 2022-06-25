@@ -10,6 +10,7 @@ import androidx.compose.ui.input.key.KeyEventType
 import androidx.compose.ui.input.key.isCtrlPressed
 import androidx.compose.ui.input.key.isMetaPressed
 import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.nativeKeyCode
 import androidx.compose.ui.input.key.type
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -42,6 +43,9 @@ class KeyboardViewModel(private val coroutineScope: CoroutineScope) {
     }
 
     fun onKeyEvent(event: KeyEvent): Boolean {
+        if (event.type == KeyEventType.KeyDown) {
+            Log.debug(event.key.toString() + " = " + event.key.nativeKeyCode)
+        }
         val isLeftCtrl = if (isMacOS) event.key == Key.MetaLeft else event.key == Key.CtrlLeft
         if (isLeftCtrl) {
             if (event.type == KeyEventType.KeyUp) {
