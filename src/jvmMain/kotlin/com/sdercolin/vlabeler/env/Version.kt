@@ -64,7 +64,7 @@ data class Version(
 
     fun isInChannel(channel: UpdateChannel): Boolean = when (channel) {
         UpdateChannel.Stable -> isStable
-        UpdateChannel.Preview -> isBeta
+        UpdateChannel.Preview -> isBeta || isStable
     }
 
     companion object {
